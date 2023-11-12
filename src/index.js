@@ -2,16 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import ProductContextProvider from './contexts/ProductContextProvider';
+import CartContextProvider from './contexts/CartContextProvider';
+import AuthContextProvider from './contexts/AuthContextProvider';
+import { ThemeProvider } from '@emotion/react';
+import { THEME } from './helpers/consts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <AuthContextProvider>
+      <ProductContextProvider>
+        <CartContextProvider>
+          <ThemeProvider theme={THEME}>
+             <App />
+          </ThemeProvider>
+        </CartContextProvider>
+      </ProductContextProvider>
+    </AuthContextProvider>
+  </BrowserRouter>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
